@@ -43,7 +43,10 @@
   sendEvent("landing_page_view", { referrer: document.referrer || null });
 
   document.querySelectorAll("[data-cta]").forEach((el) => {
-    el.addEventListener("click", () => sendEvent("cta_click", { cta: el.dataset.cta }));
+    el.addEventListener("click", () => {
+      sendEvent("cta_click", { cta: el.dataset.cta });
+      window.fathom?.trackEvent("Calibration CTA Clicked");
+    });
   });
 
   const checkout = document.getElementById("checkout-button");
